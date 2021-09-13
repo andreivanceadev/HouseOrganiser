@@ -17,8 +17,6 @@ import com.andreivanceadev.houseorganiser.viewmodel.MainActivityViewModel
 
 class MainActivity : ComponentActivity() {
 
-    private val viewModel: MainActivityViewModel by viewModels()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

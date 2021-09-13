@@ -4,6 +4,22 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../../layout/compose-model-1630675744596.xml" value="0.5" />
+        <entry key="../../../../../layout/compose-model-1630937504381.xml" value="0.45" />
+        <entry key="../../../../../layout/compose-model-1630937504392.xml" value="0.1" />
+        <entry key="../../../../../layout/compose-model-1630941164793.xml" value="0.75" />
+        <entry key="../../../../../layout/compose-model-1631544884294.xml" value="0.22675988604808406" />
+        <entry key="../../../../../layout/compose-model-1631610803388.xml" value="0.165" />
+        <entry key="../../../../../layout/compose-model-1631610969523.xml" value="0.335" />
+        <entry key="../../../../../layout/compose-model-1631611422313.xml" value="0.335" />
+        <entry key="../../../../../layout/compose-model-1631625093870.xml" value="0.1" />
+        <entry key="../../../../../layout/compose-model-1631625095355.xml" value="0.13912756113681427" />
+        <entry key="../../../../../layout/compose-model-1631625412447.xml" value="0.17525337837837837" />
+        <entry key="../../../../../layout/compose-model-1633545576167.xml" value="0.17779246530072704" />
+        <entry key="../../../../../layout/compose-model-1633546349090.xml" value="0.158955717118308" />
+        <entry key="app/rooms/src/main/res/drawable/ic_room_default.xml" value="0.18333333333333332" />
+        <entry key="app/src/main/res/drawable-anydpi/ic_action_rooms.xml" value="0.2125" />
+        <entry key="app/src/main/res/drawable-anydpi/ic_action_shopping_list.xml" value="0.2125" />
+        <entry key="app/src/main/res/drawable/ic_add_24.xml" value="0.2125" />
       </map>
     </option>
   </component>
