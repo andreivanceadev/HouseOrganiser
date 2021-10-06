@@ -1,0 +1,41 @@
+dependencies {
+    implementation(Libs.kotlin)
+    implementation(Libs.androidXCore)
+    implementation(Libs.androidXCompat)
+    implementation(Libs.coroutines)
+    implementation(Libs.gson)
+    implementation(Libs.androidXActivityKotlin)
+
+    implementation(Libs.orbitMVI)
+
+    implementation(Libs.hilt)
+    kapt(Libs.hiltCompiler)
+
+    implementation(Libs.worker)
+
+    testImplementation(UnitTestLibs.unitTestJUnit)
+    testImplementation(UnitTestLibs.mockitoCore)
+    testImplementation(UnitTestLibs.mockitoKotlin)
+    testImplementation(UnitTestLibs.truth)
+    testImplementation(UnitTestLibs.kotlinCoroutine)
+    testImplementation(UnitTestLibs.androidXArchCoreTesting)
+
+    androidTestImplementation(UiTestLibs.androidTestJUnit)
+    androidTestImplementation(UiTestLibs.androidTestEspresso)
+
+    // Integration with activities
+    implementation(Libs.composeActivity)
+    // Compose Material Design
+    implementation(Libs.composeMaterial)
+    // Animations
+    implementation(Libs.composeAnimation)
+    // Tooling support (Previews, etc.)
+    implementation(Libs.composeTooling)
+    // Integration with ViewModels
+    implementation(Libs.composeViewModel)
+
+    implementation(Libs.composeNavigation)
+    implementation(Libs.composeHiltNavigation)
+    // UI Tests
+    androidTestImplementation(Libs.composeTesting)
+}
