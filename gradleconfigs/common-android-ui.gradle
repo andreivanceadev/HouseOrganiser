@@ -1,0 +1,43 @@
+android {
+
+    buildFeatures {
+        compose = true
+    }
+
+    compileSdkVersion(Apps.compileSdk)
+    buildToolsVersion(Apps.buildTools)
+
+    defaultConfig {
+        minSdkVersion(Apps.minSdk)
+        targetSdkVersion(Apps.targetSdk)
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
+    }
+
+    buildTypes {
+        getByName("release") {
+            minifyEnabled true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+        getByName("debug") {
+            minifyEnabled = false
+        }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues true
+    }
+
+    composeOptions {
+        kotlinCompilerVersion = Versions.kotlin
+        kotlinCompilerExtensionVersion = Versions.kotlinCompilerExtensionVersion
+    }
+}

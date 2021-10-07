@@ -12,6 +12,11 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/app/features" />
+            <option value="$PROJECT_DIR$/app/features/kitchen" />
+            <option value="$PROJECT_DIR$/app/features/mealscheduler" />
+            <option value="$PROJECT_DIR$/app/storage" />
+            <option value="$PROJECT_DIR$/buildSrc" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
