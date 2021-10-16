@@ -3,6 +3,8 @@ plugins {
     id("kotlin-android")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
+    id("kotlin-parcelize")
+
 }
 
 apply("../../../gradleconfigs/ktlint-config.gradle")
@@ -11,7 +13,7 @@ apply("../../${GradleFiles.commonAndroidConfig}")
 apply("../../${GradleFiles.commonUIDependencies}")
 
 dependencies {
-    implementation(project(":app:storage"))
+    implementation(project(":app:features:common"))
 }
 
 // Allow references to generated code
