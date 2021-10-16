@@ -7,7 +7,7 @@ plugins {
 
 apply("../../../gradleconfigs/ktlint-config.gradle")
 
-apply("../../${GradleFiles.commonAndroidUI}")
+apply("../../${GradleFiles.commonAndroidConfig}")
 apply("../../${GradleFiles.commonUIDependencies}")
 
 // Allow references to generated code

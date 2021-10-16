@@ -50,6 +50,8 @@ android {
 
 dependencies {
     implementation(project(":app:features:kitchen"))
+    implementation(project(":app:features:recipes"))
+    implementation(project(":app:features:common"))
 
     implementation(Libs.kotlin)
     implementation(Libs.androidXCore)

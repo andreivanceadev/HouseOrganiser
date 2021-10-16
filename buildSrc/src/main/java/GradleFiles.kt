@@ -151,7 +151,7 @@ object UiTestLibs {
 object GradleFiles {
 
     const val commonUIDependencies = "../gradleconfigs/common-ui.gradle"
-    const val commonAndroidUI = "../gradleconfigs/common-android-ui.gradle"
+    const val commonAndroidConfig = "../gradleconfigs/common-android-ui.gradle"
     const val commonAndroidLib = "../gradleconfigs/common-android-lib.gradle"
 
 }
