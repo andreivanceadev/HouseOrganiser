@@ -1,12 +1,11 @@
 package com.andreivanceadev.houseorganiser.navigation
 
-sealed class Screen(val route: String) {
+sealed class Screen(val route: String, val title: String) {
+    object Recipes : Screen("recipes", "Recipes")
+    object RecipeAdd : Screen("recipes/add", "Add a new recipe")
+    object RecipesList : Screen("recipes/list", "Recipes")
 
-    object Recipes : Screen("recipes")
-    object RecipeAdd : Screen("recipes/add")
-    object RecipesList : Screen("recipes/list")
-
-    object Scheduler : Screen("scheduler")
-    object Storage : Screen("storage")
-    object ShoppingList : Screen("shoppinglist")
+    object Scheduler : Screen("scheduler", "Meal Plan")
+    object Storage : Screen("storage", "My Storage")
+    object ShoppingList : Screen("shoppinglist", "Shopping List")
 }

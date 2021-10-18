@@ -24,6 +24,12 @@
         <entry key="../../../../../layout/compose-model-1634334373585.xml" value="0.33" />
         <entry key="../../../../../layout/compose-model-1634361096096.xml" value="0.25" />
         <entry key="../../../../../layout/compose-model-1634366926185.xml" value="0.33" />
+        <entry key="../../../../../layout/compose-model-1634409676177.xml" value="0.16553544494720965" />
+        <entry key="../../../../../layout/compose-model-1634411875134.xml" value="0.18628281117696868" />
+        <entry key="../../../../../layout/compose-model-1634467224192.xml" value="0.17420814479638008" />
+        <entry key="../../../../../layout/compose-model-1634467292638.xml" value="0.1" />
+        <entry key="../../../../../layout/compose-model-1634475118704.xml" value="0.33" />
+        <entry key="../../../../../layout/compose-model-1634579217350.xml" value="0.17866215071972905" />
         <entry key="app/rooms/src/main/res/drawable/ic_room_default.xml" value="0.18333333333333332" />
         <entry key="app/src/main/res/drawable-anydpi/ic_action_rooms.xml" value="0.2125" />
         <entry key="app/src/main/res/drawable-anydpi/ic_action_shopping_list.xml" value="0.2125" />
@@ -31,7 +37,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

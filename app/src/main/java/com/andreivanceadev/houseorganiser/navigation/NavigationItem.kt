@@ -1,4 +1,4 @@
-package com.andreivanceadev.recipes.navigation
+package com.andreivanceadev.houseorganiser.navigation
 
 import androidx.annotation.DrawableRes
 import com.andreivanceadev.recipes.R

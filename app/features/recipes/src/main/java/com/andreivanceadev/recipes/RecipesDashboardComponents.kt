@@ -27,15 +27,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.andreivanceadev.common.theme.Dimens
 import com.andreivanceadev.common.theme.TransparentBlack_x87
+import com.andreivanceadev.recipes.navigation.RecipesNavigation
 
 @Composable
-fun RecipesScreen() {
-    RecipesView()
+fun RecipesScreen(recipesNavigation: RecipesNavigation) {
+    RecipesView(recipesNavigation)
 }
 
-@Preview(showSystemUi = true)
 @Composable
-fun RecipesView() {
+fun RecipesView(recipesNavigation: RecipesNavigation) {
     Column(
         modifier = Modifier
             .padding(Dimens.space_x1)
@@ -44,12 +44,11 @@ fun RecipesView() {
             items(getMockedCategoryList()) { recipeCategory ->
                 Spacer(modifier = Modifier.height(Dimens.space_half))
                 RecipeCategory(
-                    recipeCategory.id,
                     recipeCategory.imageId,
                     recipeCategory.title,
                     recipeCategory.description
                 ) {
-                    // TODO: 16.10.2021 Navigate to category with id
+                    recipesNavigation.moveToRecipesList(it)
                 }
                 Spacer(modifier = Modifier.height(Dimens.space_x1))
             }
@@ -61,7 +60,6 @@ fun RecipesView() {
 @Preview
 fun PreviewRecipeCategory() {
     RecipeCategory(
-        categoryId = 0,
         imageId = R.drawable.breakfast,
         label = "Breakfast",
         description = "Just a description",
@@ -71,11 +69,10 @@ fun PreviewRecipeCategory() {
 
 @Composable
 fun RecipeCategory(
-    categoryId: Int,
     @DrawableRes imageId: Int,
     label: String,
     description: String,
-    onClick: (categoryId: Int) -> Unit
+    onClick: (categoryName: String) -> Unit
 ) {
     Card(
         modifier = Modifier
@@ -85,7 +82,7 @@ fun RecipeCategory(
     ) {
         Button(
             colors = ButtonDefaults.buttonColors(Color.White),
-            onClick = { onClick(categoryId) }
+            onClick = { onClick(label) }
         ) {
 
             Row(
