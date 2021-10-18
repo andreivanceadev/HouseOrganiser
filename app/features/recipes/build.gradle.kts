@@ -14,6 +14,8 @@ apply("../../${GradleFiles.commonUIDependencies}")
 
 dependencies {
     implementation(project(":app:features:common"))
+
+    implementation(Libs.coilCompose)
 }
 
 // Allow references to generated code

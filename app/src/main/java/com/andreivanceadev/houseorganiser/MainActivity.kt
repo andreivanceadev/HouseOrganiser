@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.FloatingActionButton
@@ -15,6 +16,7 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -22,32 +24,46 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.andreivanceadev.houseorganiser.navigation.AppNavigator
+import com.andreivanceadev.houseorganiser.navigation.NavigationItem
 import com.andreivanceadev.houseorganiser.navigation.Screen
+import com.andreivanceadev.houseorganiser.navigation.TopBarController
 import com.andreivanceadev.houseorganiser.style.AppTheme
+import com.andreivanceadev.recipes.RecipesListScreen
 import com.andreivanceadev.recipes.RecipesScreen
-import com.andreivanceadev.recipes.navigation.NavigationItem
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    @Inject
+    lateinit var navigatorFactory: AppNavigator.Factory
+
+    private var toolbarTitle = mutableStateOf("Recipes")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
             AppTheme {
-                HouseOrganiserApp()
+                val topBarController = object : TopBarController {
+                    override fun configToolbar(title: String) {
+                        toolbarTitle.value = title
+                    }
+                }
+                HouseOrganiserApp(navigatorFactory.create(rememberNavController(), topBarController))
             }
         }
     }
 
     @Composable
-    fun HouseOrganiserApp() {
-        val navController = rememberNavController()
+    fun HouseOrganiserApp(appNavigator: AppNavigator) {
+        val navController = appNavigator.navController
         val navStackBackEntry = navController.currentBackStackEntryAsState()
         val currentRoute = navStackBackEntry.value?.destination?.route
 
-        val items = listOf(
+        val navBarItems = listOf(
             NavigationItem.Recipes,
             NavigationItem.Scheduler,
             NavigationItem.Storage,
@@ -56,36 +72,29 @@ class MainActivity : ComponentActivity() {
 
         Scaffold(
             topBar = {
-                TopBar(
-                    items.find { it.route == currentRoute }?.title ?: ""
-                )
+                TopBar(toolbarTitle.value)
             },
             bottomBar = {
                 BottomNavBar(
-                    items = items,
+                    items = navBarItems,
                     currentRoute = currentRoute,
                     onClick = {
-                        navController.navigate(it) {
-                            navController.graph.startDestinationRoute?.let { route ->
-                                popUpTo(route) {
-                                    saveState = true
-                                }
-                            }
-                            launchSingleTop = true
-                            restoreState = true
-                        }
+                        appNavigator.bottomNavBarNavigation(it)
                     }
                 )
             },
             floatingActionButton =
             getFabForScreen(currentRoute = currentRoute) { route ->
-                navController.navigate(route = route)
+                appNavigator.fabNavigation(route = route)
             }
-
-        ) {
-            NavHost(navController = navController, startDestination = Screen.Recipes.route) {
+        ) { innerPadding ->
+            NavHost(
+                modifier = Modifier.padding(innerPadding),
+                navController = navController,
+                startDestination = Screen.Recipes.route
+            ) {
                 composable(route = Screen.Recipes.route) {
-                    RecipesScreen()
+                    RecipesScreen(recipesNavigation = appNavigator)
                 }
                 composable(route = Screen.Scheduler.route) {
                     ScreenPlaceholder(title = "Scheduler")
@@ -98,6 +107,9 @@ class MainActivity : ComponentActivity() {
                 }
                 composable(route = Screen.RecipeAdd.route) {
                     ScreenPlaceholder(title = "Add Recipe")
+                }
+                composable(route = Screen.RecipesList.route) {
+                    RecipesListScreen(recipesNavigation = appNavigator)
                 }
             }
         }

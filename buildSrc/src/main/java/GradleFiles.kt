@@ -20,7 +20,6 @@ object Versions {
     const val androidxCore = "1.3.2"
     const val androidxCompat = "1.2.0"
     const val material = "1.2.1"
-    const val androidxFragmentKotlin = "1.3.0"
     const val androidXActivityKotlin = "1.2.1"
 
     // Test Libs
@@ -42,7 +41,7 @@ object Versions {
     const val hilt = "2.38.1"
 
     // Image Loader
-    const val picasso = "2.71828"
+    const val coilCompose = "1.4.0"
 
     // Coroutines
     const val coroutines = "1.3.8"
@@ -86,7 +85,7 @@ object Libs {
     const val hilt = "com.google.dagger:hilt-android:${Versions.hilt}"
     const val hiltCompiler = "com.google.dagger:hilt-android-compiler:${Versions.hilt}"
 
-    const val picasso = "com.squareup.picasso:picasso:${Versions.picasso}"
+    const val coilCompose = "io.coil-kt:coil-compose:${Versions.coilCompose}"
 
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
     const val coroutinesCore = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
