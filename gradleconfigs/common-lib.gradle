@@ -1,0 +1,11 @@
+dependencies {
+    implementation(Libs.kotlin)
+
+    implementation(Libs.hilt)
+    kapt(Libs.hiltCompiler)
+
+    testImplementation(UnitTestLibs.unitTestJUnit)
+    testImplementation(UnitTestLibs.mockitoCore)
+    testImplementation(UnitTestLibs.mockitoKotlin)
+    testImplementation(UnitTestLibs.truth)
+}

@@ -18,6 +18,9 @@ import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,31 +28,63 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.andreivanceadev.common.theme.Dimens
 import com.andreivanceadev.common.theme.TransparentBlack_x87
-import com.andreivanceadev.recipes.navigation.RecipesNavigation
+import com.andreivanceadev.recipes.model.CategoryType
+import com.andreivanceadev.recipes.viewmodel.RecipesNavigator
+import com.andreivanceadev.recipes.viewmodel.RecipesViewModel
+import com.andreivanceadev.recipes.viewmodel.RecipesViewState
+import com.andreivanceadev.recipes.viewmodel.ShowCategory
+import kotlinx.coroutines.flow.collect
 
 @Composable
-fun RecipesScreen(recipesNavigation: RecipesNavigation) {
-    RecipesView(recipesNavigation)
+fun RecipesScreen(
+    viewModel: RecipesViewModel = hiltViewModel(),
+    recipesNavigator: RecipesNavigator
+) {
+
+    val viewState = viewModel.container.stateFlow.collectAsState()
+
+    RecipesView(
+        viewState = remember { getMockedViewState() },
+        onRecipeCategoryClick = { categoryName ->
+            viewModel.onMoveToRecipesList(categoryName)
+        }
+    )
+
+    // navigations should be side effects
+
+    LaunchedEffect(key1 = null) {
+        viewModel.container.sideEffectFlow.collect { sideEffect ->
+            when (sideEffect) {
+                is ShowCategory -> {
+                    recipesNavigator.recipesDashboardToCategoryView(sideEffect.category)
+                }
+            }
+        }
+    }
 }
 
 @Composable
-fun RecipesView(recipesNavigation: RecipesNavigation) {
+fun RecipesView(
+    viewState: RecipesViewState,
+    onRecipeCategoryClick: (categoryId: String) -> Unit
+) {
     Column(
         modifier = Modifier
             .padding(Dimens.space_x1)
     ) {
         LazyColumn {
-            items(getMockedCategoryList()) { recipeCategory ->
+            items(viewState.categories) { recipeCategory ->
                 Spacer(modifier = Modifier.height(Dimens.space_half))
                 RecipeCategory(
-                    recipeCategory.imageId,
-                    recipeCategory.title,
-                    recipeCategory.description
-                ) {
-                    recipesNavigation.moveToRecipesList(it)
-                }
+                    categoryType = recipeCategory.categoryType,
+                    imageId = recipeCategory.imageId,
+                    label = recipeCategory.title,
+                    description = recipeCategory.description,
+                    onClick = onRecipeCategoryClick
+                )
                 Spacer(modifier = Modifier.height(Dimens.space_x1))
             }
         }
@@ -60,6 +95,7 @@ fun RecipesView(recipesNavigation: RecipesNavigation) {
 @Preview
 fun PreviewRecipeCategory() {
     RecipeCategory(
+        categoryType = CategoryType.BREAKFAST,
         imageId = R.drawable.breakfast,
         label = "Breakfast",
         description = "Just a description",
@@ -69,6 +105,7 @@ fun PreviewRecipeCategory() {
 
 @Composable
 fun RecipeCategory(
+    categoryType: CategoryType,
     @DrawableRes imageId: Int,
     label: String,
     description: String,
@@ -82,7 +119,7 @@ fun RecipeCategory(
     ) {
         Button(
             colors = ButtonDefaults.buttonColors(Color.White),
-            onClick = { onClick(label) }
+            onClick = { onClick(categoryType.categoryName) }
         ) {
 
             Row(

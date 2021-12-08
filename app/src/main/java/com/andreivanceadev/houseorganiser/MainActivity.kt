@@ -1,6 +1,7 @@
 package com.andreivanceadev.houseorganiser
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
@@ -16,21 +17,25 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavGraph.Companion.findStartDestination
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import com.andreivanceadev.houseorganiser.navigation.AppNavigator
-import com.andreivanceadev.houseorganiser.navigation.NavigationItem
-import com.andreivanceadev.houseorganiser.navigation.Screen
-import com.andreivanceadev.houseorganiser.navigation.TopBarController
+import com.andreivanceadev.houseorganiser.navigation.BottomNavigationItem
 import com.andreivanceadev.houseorganiser.style.AppTheme
-import com.andreivanceadev.recipes.RecipesListScreen
+import com.andreivanceadev.navigation.bottomnav.BottomNavDestinations
+import com.andreivanceadev.navigation.recipes.RecipesDirections
 import com.andreivanceadev.recipes.RecipesScreen
+import com.andreivanceadev.recipes.list.RecipesListScreen
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -40,133 +45,156 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var navigatorFactory: AppNavigator.Factory
 
-    private var toolbarTitle = mutableStateOf("Recipes")
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         setContent {
             AppTheme {
-                val topBarController = object : TopBarController {
-                    override fun configToolbar(title: String) {
-                        toolbarTitle.value = title
-                    }
-                }
-                HouseOrganiserApp(navigatorFactory.create(rememberNavController(), topBarController))
+                Log.d("Composition", "AppTheme{}")
+                HouseOrganiserApp(navigatorFactory.create(rememberNavController()))
             }
         }
     }
+}
 
-    @Composable
-    fun HouseOrganiserApp(appNavigator: AppNavigator) {
-        val navController = appNavigator.navController
-        val navStackBackEntry = navController.currentBackStackEntryAsState()
-        val currentRoute = navStackBackEntry.value?.destination?.route
+@Composable
+fun HouseOrganiserApp(navigator: AppNavigator) {
 
-        val navBarItems = listOf(
-            NavigationItem.Recipes,
-            NavigationItem.Scheduler,
-            NavigationItem.Storage,
-            NavigationItem.ShoppingList
-        )
+    Log.d("Composition", "HouseOrganiserApp()")
 
-        Scaffold(
-            topBar = {
-                TopBar(toolbarTitle.value)
-            },
-            bottomBar = {
-                BottomNavBar(
-                    items = navBarItems,
-                    currentRoute = currentRoute,
-                    onClick = {
-                        appNavigator.bottomNavBarNavigation(it)
-                    }
-                )
-            },
-            floatingActionButton =
-            getFabForScreen(currentRoute = currentRoute) { route ->
-                appNavigator.fabNavigation(route = route)
-            }
-        ) { innerPadding ->
-            NavHost(
-                modifier = Modifier.padding(innerPadding),
+    val navBarItems = listOf(
+        BottomNavigationItem.Recipes,
+        BottomNavigationItem.Scheduler,
+        BottomNavigationItem.Storage,
+        BottomNavigationItem.ShoppingList
+    )
+
+    Log.d("Composition", "AppView()")
+    val navController = navigator.navController
+
+    val backstackEntry = navController.currentBackStackEntryAsState()
+    val currentRoute = BottomNavDestinations.fromRoute(backstackEntry.value?.destination?.route)
+    val showFab =
+        currentRoute == BottomNavDestinations.Recipes &&
+            backstackEntry.value?.destination?.route != RecipesDirections.recipesAdd.route
+
+    Scaffold(
+        topBar = {
+            TopBar(title = currentRoute.screenTitle)
+            Log.d("Composition", "TopBar()")
+        },
+        bottomBar = {
+            BottomNavBar(
                 navController = navController,
-                startDestination = Screen.Recipes.route
+                items = navBarItems
+            )
+        },
+        floatingActionButton = {
+            if (showFab) {
+                FabAddItems {
+                    navController.navigate(RecipesDirections.recipesAdd.route)
+                }
+            }
+            Log.d("Composition", "Fab()")
+        }
+    ) { innerPadding ->
+        NavHost(
+            modifier = Modifier.padding(innerPadding),
+            navController = navController,
+            startDestination = BottomNavDestinations.Recipes.route
+        ) {
+            navigation(
+                startDestination = RecipesDirections.root.route,
+                route = BottomNavDestinations.Recipes.route,
             ) {
-                composable(route = Screen.Recipes.route) {
-                    RecipesScreen(recipesNavigation = appNavigator)
+                composable(route = RecipesDirections.root.route) {
+                    RecipesScreen(
+                        recipesNavigator = navigator
+                    )
                 }
-                composable(route = Screen.Scheduler.route) {
-                    ScreenPlaceholder(title = "Scheduler")
+                composable(
+                    route = RecipesDirections.RecipesList.route,
+                    arguments = RecipesDirections.RecipesList.arguments
+                ) {
+                    RecipesListScreen()
                 }
-                composable(route = Screen.Storage.route) {
-                    ScreenPlaceholder(title = "Storage")
-                }
-                composable(route = Screen.ShoppingList.route) {
-                    ScreenPlaceholder(title = "ShoppingList")
-                }
-                composable(route = Screen.RecipeAdd.route) {
+                composable(route = RecipesDirections.recipesAdd.route) {
                     ScreenPlaceholder(title = "Add Recipe")
                 }
-                composable(route = Screen.RecipesList.route) {
-                    RecipesListScreen(recipesNavigation = appNavigator)
-                }
+            }
+
+            composable(route = BottomNavDestinations.Scheduler.route) {
+                ScreenPlaceholder(title = "Scheduler")
+            }
+            composable(route = BottomNavDestinations.Storage.route) {
+                ScreenPlaceholder(title = "Storage")
+            }
+            composable(route = BottomNavDestinations.ShoppingList.route) {
+                ScreenPlaceholder(title = "ShoppingList")
             }
         }
     }
+}
 
-    private fun getFabForScreen(currentRoute: String?, onClick: (route: String) -> Unit): @Composable () -> Unit {
-        if (currentRoute == Screen.RecipesList.route) {
-            return {
-                FabAddItems {
-                    onClick(Screen.RecipeAdd.route)
+@Composable
+private fun FabAddItems(onClick: () -> Unit) {
+    FloatingActionButton(onClick = onClick) {
+        Icon(painter = painterResource(id = R.drawable.ic_add), contentDescription = "")
+    }
+}
+
+@Composable
+private fun TopBar(title: String) {
+    TopAppBar(
+        title = { Text(text = title) }
+    )
+}
+
+@Composable
+private fun BottomNavBar(
+    navController: NavHostController,
+    items: List<BottomNavigationItem>
+) {
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentDestination = navBackStackEntry?.destination
+
+    currentDestination ?: return
+
+    BottomNavigation {
+        items.forEach { item ->
+            BottomNavigationItem(
+                icon = { Icon(painter = painterResource(id = item.imageId), contentDescription = item.title) },
+                label = { Text(text = item.title) },
+                selected = currentDestination.hierarchy.any { it.route == item.navDestination.route },
+                onClick = {
+                    navController.navigate(item.navDestination.route) {
+                        // Pop up to the start destination of the graph to
+                        // avoid building up a large stack of destinations
+                        // on the back stack as users select items
+                        popUpTo(navController.graph.findStartDestination().id) {
+                            saveState = true
+                        }
+                        // Avoid multiple copies of the same destination when
+                        // reselecting the same item
+                        launchSingleTop = true
+                        // Restore state when reselecting a previously selected item
+                        restoreState = true
+                    }
                 }
-            }
-        }
-        return {}
-    }
-
-    @Composable
-    private fun FabAddItems(onClick: () -> Unit) {
-        FloatingActionButton(onClick = onClick) {
-            Icon(painter = painterResource(id = R.drawable.ic_add), contentDescription = "")
+            )
         }
     }
 
-    @Composable
-    fun TopBar(title: String) {
-        TopAppBar(
-            title = { Text(text = title) }
-        )
-    }
+    Log.d("Composition", "BottomNavBar()")
+}
 
-    @Composable
-    fun BottomNavBar(
-        items: List<NavigationItem>,
-        currentRoute: String?,
-        onClick: (route: String) -> Unit
+@Composable
+private fun ScreenPlaceholder(title: String) {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
-        BottomNavigation {
-
-            items.forEach { item ->
-                BottomNavigationItem(
-                    icon = { Icon(painter = painterResource(id = item.imageId), contentDescription = item.title) },
-                    label = { Text(text = item.title) },
-                    selected = currentRoute?.startsWith(item.route) ?: false,
-                    onClick = { onClick(item.route) }
-                )
-            }
-        }
-    }
-
-    @Composable
-    fun ScreenPlaceholder(title: String) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Text(text = title, style = MaterialTheme.typography.h5)
-        }
+        Text(text = title, style = MaterialTheme.typography.h5)
     }
 }

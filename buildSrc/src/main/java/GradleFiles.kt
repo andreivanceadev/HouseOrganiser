@@ -11,7 +11,7 @@ object Apps {
 }
 
 object Versions {
-    const val gradle = "7.0.2"
+    const val gradle = "7.0.3"
     const val kotlin = "1.5.21"
     const val kotlinCompilerExtensionVersion = "1.0.1"
     const val gmsGoogleServices = "4.3.10"
@@ -150,7 +150,8 @@ object UiTestLibs {
 object GradleFiles {
 
     const val commonUIDependencies = "../gradleconfigs/common-ui.gradle"
+    const val commonLibDependencies = "../gradleconfigs/common-lib.gradle"
     const val commonAndroidConfig = "../gradleconfigs/common-android-ui.gradle"
-    const val commonAndroidLib = "../gradleconfigs/common-android-lib.gradle"
+    const val commonAndroidLibConfig = "../gradleconfigs/common-android-lib.gradle"
 
 }
