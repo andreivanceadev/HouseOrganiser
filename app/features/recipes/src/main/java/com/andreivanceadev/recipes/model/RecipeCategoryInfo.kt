@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class RecipeCategoryInfo(
-    val id: Int,
+    val categoryType: CategoryType,
     @DrawableRes val imageId: Int,
     val title: String,
     val description: String

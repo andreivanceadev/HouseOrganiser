@@ -4,7 +4,7 @@ plugins {
 }
 
 apply("../../gradleconfigs/ktlint-config.gradle")
-apply("../${GradleFiles.commonAndroidLib}")
+apply("../${GradleFiles.commonAndroidLibConfig}")
 
 dependencies {
 

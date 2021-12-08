@@ -3,6 +3,7 @@ plugins {
     id("kotlin-android")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
+    id("kotlin-parcelize")
 }
 
 apply("../gradleconfigs/ktlint-config.gradle")
@@ -18,7 +19,7 @@ android {
     val versionFromGradleProperty = project.property("VERSION_NAME") as String
 
     defaultConfig {
-        applicationId = "com.andrevanceadev.houseorganiser"
+        applicationId = "com.andreivanceadev.houseorganiser"
         minSdk = Apps.minSdk
         targetSdk = Apps.targetSdk
         versionCode = Apps.versionCode(versionFromGradleProperty)
@@ -51,11 +52,15 @@ dependencies {
     implementation(project(":app:features:kitchen"))
     implementation(project(":app:features:recipes"))
     implementation(project(":app:features:common"))
+    implementation(project(":app:navigation"))
 
     implementation(Libs.kotlin)
     implementation(Libs.androidXCore)
     implementation(Libs.material)
     implementation(Libs.androidXCompat)
+
+    implementation(Libs.orbitMVI)
+    implementation(Libs.orbitMVICore)
 
     implementation(Libs.hilt)
     kapt(Libs.hiltCompiler)

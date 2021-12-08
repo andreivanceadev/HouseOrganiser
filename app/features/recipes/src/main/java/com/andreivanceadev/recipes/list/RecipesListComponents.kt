@@ -1,4 +1,4 @@
-package com.andreivanceadev.recipes
+package com.andreivanceadev.recipes.list
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -23,6 +23,9 @@ import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
@@ -33,24 +36,30 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberImagePainter
 import com.andreivanceadev.common.theme.Dimens
+import com.andreivanceadev.recipes.R
+import com.andreivanceadev.recipes.list.viewmodel.RecipesListViewModel
+import com.andreivanceadev.recipes.list.viewmodel.RecipesListViewState
 import com.andreivanceadev.recipes.model.RecipeInfo
-import com.andreivanceadev.recipes.navigation.RecipesNavigation
 
 @Preview(showSystemUi = true)
 @Composable
 fun PreviewRecipesListScreen() {
-    RecipesListScreen(object : RecipesNavigation {
-        override fun moveToRecipesList(categoryName: String) {}
-    })
+    RecipesListScreen()
 }
 
 @Composable
-fun RecipesListScreen(recipesNavigation: RecipesNavigation) {
+fun RecipesListScreen(
+    viewModel: RecipesListViewModel = hiltViewModel()
+) {
+
+    val viewState = viewModel.container.stateFlow.collectAsState()
+
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         SearchBar()
-        RecipesListView(breakfastRecipeInfoListMock)
+        RecipesListView(viewState.value)
     }
 }
 
@@ -58,7 +67,7 @@ fun RecipesListScreen(recipesNavigation: RecipesNavigation) {
 fun SearchBar() {
 
     // TODO: 17.10.2021 val query = viewModel.query.value
-    val query = ""
+    val query = remember { mutableStateOf("") }
 
     Surface(
         modifier = Modifier.fillMaxWidth(),
@@ -67,11 +76,11 @@ fun SearchBar() {
         Row(modifier = Modifier.fillMaxWidth()) {
             TextField(
                 colors = TextFieldDefaults.textFieldColors(backgroundColor = MaterialTheme.colors.surface),
-                value = query,
+                value = query.value,
                 modifier = Modifier
                     .fillMaxWidth(),
-                onValueChange = {
-                    // TODO: 17.10.2021 viewModel.onQueryChanged(it)
+                onValueChange = { newValue ->
+                    query.value = newValue
                 },
                 label = {
                     Text(text = "Search")
@@ -98,10 +107,10 @@ fun SearchBar() {
 }
 
 @Composable
-fun RecipesListView(listItems: List<RecipeInfo>) {
+fun RecipesListView(viewState: RecipesListViewState) {
     Spacer(modifier = Modifier.height(Dimens.space_x1))
     LazyColumn {
-        items(listItems) { recipe ->
+        items(viewState.recipesList) { recipe ->
             RecipeListItem(recipeInfo = recipe)
             Spacer(modifier = Modifier.height(Dimens.space_x1))
         }
@@ -150,7 +159,7 @@ fun RecipeContent(modifier: Modifier = Modifier, recipeInfo: RecipeInfo) {
         )
         Spacer(modifier = Modifier.height(Dimens.space_x2))
         Text(
-            text = recipeInfo.type,
+            text = recipeInfo.type.categoryName,
             style = MaterialTheme.typography.body1
         )
         Spacer(modifier = Modifier.height(Dimens.space_x2))

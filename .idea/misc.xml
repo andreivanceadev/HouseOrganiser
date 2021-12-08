@@ -30,6 +30,16 @@
         <entry key="../../../../../layout/compose-model-1634467292638.xml" value="0.1" />
         <entry key="../../../../../layout/compose-model-1634475118704.xml" value="0.33" />
         <entry key="../../../../../layout/compose-model-1634579217350.xml" value="0.17866215071972905" />
+        <entry key="../../../../../layout/compose-model-1635276574973.xml" value="0.7780269058295964" />
+        <entry key="../../../../../layout/compose-model-1635323316291.xml" value="0.3175925925925926" />
+        <entry key="../../../../../layout/compose-model-1635340109981.xml" value="0.10555555555555556" />
+        <entry key="../../../../../layout/compose-model-1635340317183.xml" value="0.10555555555555556" />
+        <entry key="../../../../../layout/compose-model-1635405308297.xml" value="0.22407407407407406" />
+        <entry key="../../../../../layout/compose-model-1635406060645.xml" value="0.1" />
+        <entry key="../../../../../layout/compose-model-1635411121311.xml" value="0.1" />
+        <entry key="../../../../../layout/compose-model-1635881648845.xml" value="0.1" />
+        <entry key="../../../../../layout/compose-model-1635884180720.xml" value="0.2064814814814815" />
+        <entry key="../../../../../layout/compose-model-1638961529581.xml" value="0.2037037037037037" />
         <entry key="app/rooms/src/main/res/drawable/ic_room_default.xml" value="0.18333333333333332" />
         <entry key="app/src/main/res/drawable-anydpi/ic_action_rooms.xml" value="0.2125" />
         <entry key="app/src/main/res/drawable-anydpi/ic_action_shopping_list.xml" value="0.2125" />
@@ -37,7 +47,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

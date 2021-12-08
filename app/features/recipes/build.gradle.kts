@@ -14,6 +14,7 @@ apply("../../${GradleFiles.commonUIDependencies}")
 
 dependencies {
     implementation(project(":app:features:common"))
+    implementation(project(":app:navigation"))
 
     implementation(Libs.coilCompose)
 }

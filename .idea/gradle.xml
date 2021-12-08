@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/app/features/kitchen" />
             <option value="$PROJECT_DIR$/app/features/mealscheduler" />
             <option value="$PROJECT_DIR$/app/features/recipes" />
+            <option value="$PROJECT_DIR$/app/navigation" />
             <option value="$PROJECT_DIR$/app/storage" />
             <option value="$PROJECT_DIR$/buildSrc" />
           </set>
