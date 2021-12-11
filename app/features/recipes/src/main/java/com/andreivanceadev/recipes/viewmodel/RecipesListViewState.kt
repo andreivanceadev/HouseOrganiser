@@ -1,4 +1,4 @@
-package com.andreivanceadev.recipes.list.viewmodel
+package com.andreivanceadev.recipes.viewmodel
 
 import android.os.Parcelable
 import com.andreivanceadev.recipes.model.RecipeInfo

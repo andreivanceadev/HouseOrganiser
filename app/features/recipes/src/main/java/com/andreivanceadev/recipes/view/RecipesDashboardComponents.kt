@@ -1,4 +1,4 @@
-package com.andreivanceadev.recipes
+package com.andreivanceadev.recipes.view
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.andreivanceadev.common.theme.Dimens
 import com.andreivanceadev.common.theme.TransparentBlack_x87
+import com.andreivanceadev.recipes.R
 import com.andreivanceadev.recipes.model.CategoryType
 import com.andreivanceadev.recipes.viewmodel.RecipesNavigator
 import com.andreivanceadev.recipes.viewmodel.RecipesViewModel

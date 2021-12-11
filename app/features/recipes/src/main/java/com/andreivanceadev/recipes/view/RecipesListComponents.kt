@@ -1,4 +1,4 @@
-package com.andreivanceadev.recipes.list
+package com.andreivanceadev.recipes.view
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -40,9 +40,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberImagePainter
 import com.andreivanceadev.common.theme.Dimens
 import com.andreivanceadev.recipes.R
-import com.andreivanceadev.recipes.list.viewmodel.RecipesListViewModel
-import com.andreivanceadev.recipes.list.viewmodel.RecipesListViewState
 import com.andreivanceadev.recipes.model.RecipeInfo
+import com.andreivanceadev.recipes.viewmodel.RecipesListViewModel
+import com.andreivanceadev.recipes.viewmodel.RecipesListViewState
 
 @Preview(showSystemUi = true)
 @Composable

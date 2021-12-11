@@ -34,8 +34,8 @@ import com.andreivanceadev.houseorganiser.navigation.BottomNavigationItem
 import com.andreivanceadev.houseorganiser.style.AppTheme
 import com.andreivanceadev.navigation.bottomnav.BottomNavDestinations
 import com.andreivanceadev.navigation.recipes.RecipesDirections
-import com.andreivanceadev.recipes.RecipesScreen
-import com.andreivanceadev.recipes.list.RecipesListScreen
+import com.andreivanceadev.recipes.view.RecipesListScreen
+import com.andreivanceadev.recipes.view.RecipesScreen
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

@@ -1,5 +1,6 @@
-package com.andreivanceadev.recipes
+package com.andreivanceadev.recipes.view
 
+import com.andreivanceadev.recipes.R
 import com.andreivanceadev.recipes.model.CategoryType
 import com.andreivanceadev.recipes.model.RecipeCategoryInfo
 import com.andreivanceadev.recipes.viewmodel.RecipesViewState
