@@ -1,13 +1,13 @@
-package com.andreivanceadev.recipes.list.viewmodel
+package com.andreivanceadev.recipes.viewmodel
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.andreivanceadev.navigation.recipes.RecipesDirections
-import com.andreivanceadev.recipes.list.model.breakfastRecipeInfoListMock
-import com.andreivanceadev.recipes.list.model.dinnerRecipeInfoListMock
-import com.andreivanceadev.recipes.list.model.lunchRecipeInfoListMock
-import com.andreivanceadev.recipes.list.model.snackRecipeInfoListMock
 import com.andreivanceadev.recipes.model.CategoryType
+import com.andreivanceadev.recipes.model.breakfastRecipeInfoListMock
+import com.andreivanceadev.recipes.model.dinnerRecipeInfoListMock
+import com.andreivanceadev.recipes.model.lunchRecipeInfoListMock
+import com.andreivanceadev.recipes.model.snackRecipeInfoListMock
 import dagger.hilt.android.lifecycle.HiltViewModel
 import org.orbitmvi.orbit.Container
 import org.orbitmvi.orbit.ContainerHost

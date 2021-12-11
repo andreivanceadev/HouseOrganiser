@@ -1,7 +1,4 @@
-package com.andreivanceadev.recipes.list.model
-
-import com.andreivanceadev.recipes.model.CategoryType
-import com.andreivanceadev.recipes.model.RecipeInfo
+package com.andreivanceadev.recipes.model
 
 val breakfastRecipeInfoListMock = listOf(
     RecipeInfo(
