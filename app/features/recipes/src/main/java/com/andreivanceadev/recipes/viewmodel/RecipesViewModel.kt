@@ -2,6 +2,7 @@ package com.andreivanceadev.recipes.viewmodel
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import com.andreivanceadev.recipes.model.models.CategoryType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import org.orbitmvi.orbit.ContainerHost
 import org.orbitmvi.orbit.syntax.simple.intent
@@ -20,7 +21,7 @@ class RecipesViewModel @Inject constructor(
     ) {
     }
 
-    fun onMoveToRecipesList(categoryName: String) = intent {
-        postSideEffect(ShowCategory(categoryName))
+    fun onMoveToRecipesList(categoryType: CategoryType) = intent {
+        postSideEffect(ShowCategory(categoryType))
     }
 }

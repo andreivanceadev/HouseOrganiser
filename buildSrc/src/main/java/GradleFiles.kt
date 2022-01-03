@@ -11,7 +11,7 @@ object Apps {
 }
 
 object Versions {
-    const val gradle = "7.0.3"
+    const val gradle = "7.0.4"
     const val kotlin = "1.5.21"
     const val kotlinCompilerExtensionVersion = "1.0.1"
     const val gmsGoogleServices = "4.3.10"

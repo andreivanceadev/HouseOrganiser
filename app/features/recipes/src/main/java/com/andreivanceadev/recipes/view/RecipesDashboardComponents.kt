@@ -32,7 +32,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.andreivanceadev.common.theme.Dimens
 import com.andreivanceadev.common.theme.TransparentBlack_x87
 import com.andreivanceadev.recipes.R
-import com.andreivanceadev.recipes.model.CategoryType
+import com.andreivanceadev.recipes.model.models.CategoryType
 import com.andreivanceadev.recipes.viewmodel.RecipesNavigator
 import com.andreivanceadev.recipes.viewmodel.RecipesViewModel
 import com.andreivanceadev.recipes.viewmodel.RecipesViewState
@@ -54,8 +54,6 @@ fun RecipesScreen(
         }
     )
 
-    // navigations should be side effects
-
     LaunchedEffect(key1 = null) {
         viewModel.container.sideEffectFlow.collect { sideEffect ->
             when (sideEffect) {
@@ -70,7 +68,7 @@ fun RecipesScreen(
 @Composable
 fun RecipesView(
     viewState: RecipesViewState,
-    onRecipeCategoryClick: (categoryId: String) -> Unit
+    onRecipeCategoryClick: (category: CategoryType) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -84,7 +82,7 @@ fun RecipesView(
                     imageId = recipeCategory.imageId,
                     label = recipeCategory.title,
                     description = recipeCategory.description,
-                    onClick = onRecipeCategoryClick
+                    onClick = { onRecipeCategoryClick(recipeCategory.categoryType) }
                 )
                 Spacer(modifier = Modifier.height(Dimens.space_x1))
             }

@@ -1,8 +1,7 @@
 package com.andreivanceadev.houseorganiser.navigation
 
 import androidx.annotation.DrawableRes
-import com.andreivanceadev.navigation.NavigationCommand
-import com.andreivanceadev.navigation.bottomnav.BottomNavDestinations
+import com.andreivanceadev.houseorganiser.navigation.bottomnav.BottomNavDestinations
 import com.andreivanceadev.recipes.R
 
 sealed class BottomNavigationItem(val navDestination: NavigationCommand, @DrawableRes val imageId: Int, val title: String) {

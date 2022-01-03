@@ -5,6 +5,7 @@ import com.andreivanceadev.storage.KitchenOrganiserDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -18,9 +19,9 @@ class DBModule {
 
     @Provides
     @Singleton
-    fun provideRecipeCategoryDao(database: KitchenOrganiserDatabase) = database.recipeCategoryDao
+    fun provideRecipeDao(database: KitchenOrganiserDatabase) = database.recipeDao
 
     @Provides
     @Singleton
-    fun provideRecipeDao(database: KitchenOrganiserDatabase) = database.recipeDao
+    fun provideAppContext(@ApplicationContext context: Context) = context
 }

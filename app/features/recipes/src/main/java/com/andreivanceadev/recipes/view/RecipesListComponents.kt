@@ -40,7 +40,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.rememberImagePainter
 import com.andreivanceadev.common.theme.Dimens
 import com.andreivanceadev.recipes.R
-import com.andreivanceadev.recipes.model.RecipeInfo
+import com.andreivanceadev.recipes.model.models.RecipeModel
 import com.andreivanceadev.recipes.viewmodel.RecipesListViewModel
 import com.andreivanceadev.recipes.viewmodel.RecipesListViewState
 
@@ -111,14 +111,14 @@ fun RecipesListView(viewState: RecipesListViewState) {
     Spacer(modifier = Modifier.height(Dimens.space_x1))
     LazyColumn {
         items(viewState.recipesList) { recipe ->
-            RecipeListItem(recipeInfo = recipe)
+            RecipeListItem(recipeModel = recipe)
             Spacer(modifier = Modifier.height(Dimens.space_x1))
         }
     }
 }
 
 @Composable
-fun RecipeListItem(recipeInfo: RecipeInfo) {
+fun RecipeListItem(recipeModel: RecipeModel) {
 
     Card(
         modifier = Modifier
@@ -132,8 +132,8 @@ fun RecipeListItem(recipeInfo: RecipeInfo) {
                     .height(194.dp)
                     .fillMaxWidth(),
                 contentScale = ContentScale.FillBounds,
-                painter = if (recipeInfo.imageUrl.isNotEmpty())
-                    rememberImagePainter(recipeInfo.imageUrl) else
+                painter = if (recipeModel.imageUrl.isNotEmpty())
+                    rememberImagePainter(recipeModel.imageUrl) else
                 // TODO: 17.10.2021 replace with image placeholder for recipes
                     painterResource(id = R.drawable.breakfast),
                 contentDescription = "RecipeImage"
@@ -144,27 +144,27 @@ fun RecipeListItem(recipeInfo: RecipeInfo) {
                     end = Dimens.space_x2,
                     top = Dimens.space_x2
                 ),
-                recipeInfo = recipeInfo
+                recipeModel = recipeModel
             )
         }
     }
 }
 
 @Composable
-fun RecipeContent(modifier: Modifier = Modifier, recipeInfo: RecipeInfo) {
+fun RecipeContent(modifier: Modifier = Modifier, recipeModel: RecipeModel) {
     Column(modifier = modifier) {
         Text(
-            text = recipeInfo.title,
+            text = recipeModel.title,
             style = MaterialTheme.typography.h6
         )
         Spacer(modifier = Modifier.height(Dimens.space_x2))
         Text(
-            text = recipeInfo.type.categoryName,
+            text = recipeModel.type.categoryName,
             style = MaterialTheme.typography.body1
         )
         Spacer(modifier = Modifier.height(Dimens.space_x2))
         Text(
-            text = recipeInfo.description,
+            text = recipeModel.instructions,
             style = MaterialTheme.typography.body2
         )
     }

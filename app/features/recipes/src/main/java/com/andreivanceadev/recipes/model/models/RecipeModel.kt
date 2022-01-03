@@ -1,12 +1,14 @@
-package com.andreivanceadev.recipes.model
+package com.andreivanceadev.recipes.model.models
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class RecipeInfo(
+data class RecipeModel(
+    val id: Int = -1,
     val imageUrl: String,
     val title: String,
     val type: CategoryType,
-    val description: String
+    val instructions: String,
+    val ingredients: List<IngredientModel>
 ) : Parcelable

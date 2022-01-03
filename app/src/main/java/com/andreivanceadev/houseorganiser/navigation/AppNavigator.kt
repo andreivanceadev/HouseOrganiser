@@ -1,7 +1,8 @@
 package com.andreivanceadev.houseorganiser.navigation
 
 import androidx.navigation.NavHostController
-import com.andreivanceadev.navigation.recipes.RecipesDirections
+import com.andreivanceadev.houseorganiser.navigation.recipes.RecipesDirections
+import com.andreivanceadev.recipes.model.models.CategoryType
 import com.andreivanceadev.recipes.viewmodel.RecipesNavigator
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
@@ -16,7 +17,7 @@ class AppNavigator @AssistedInject constructor(
         fun create(navController: NavHostController): AppNavigator
     }
 
-    override fun recipesDashboardToCategoryView(category: String) {
+    override fun recipesDashboardToCategoryView(category: CategoryType) {
         navController.navigate(RecipesDirections.RecipesList.category(category).route)
     }
 }

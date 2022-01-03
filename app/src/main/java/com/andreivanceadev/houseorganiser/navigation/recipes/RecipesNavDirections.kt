@@ -1,9 +1,10 @@
-package com.andreivanceadev.navigation.recipes
+package com.andreivanceadev.houseorganiser.navigation.recipes
 
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
-import com.andreivanceadev.navigation.NavigationCommand
+import com.andreivanceadev.houseorganiser.navigation.NavigationCommand
+import com.andreivanceadev.recipes.model.models.CategoryType
 
 object RecipesDirections {
 
@@ -20,17 +21,17 @@ object RecipesDirections {
     }
 
     object RecipesList {
-        const val KEY_CATEGORY_NAME = "categoryName"
+        private const val KEY_CATEGORY_NAME = "categoryName"
         const val route = "recipes/list/{$KEY_CATEGORY_NAME}"
 
         val arguments = listOf(
             navArgument(KEY_CATEGORY_NAME) { type = NavType.StringType }
         )
 
-        fun category(categoryName: String) = object : NavigationCommand {
+        fun category(category: CategoryType) = object : NavigationCommand {
             override val args = arguments
-            override val route = "recipes/list/$categoryName"
-            override val screenTitle: String = categoryName
+            override val route = "recipes/list/${category.categoryName}"
+            override val screenTitle: String = category.categoryName
         }
     }
 }

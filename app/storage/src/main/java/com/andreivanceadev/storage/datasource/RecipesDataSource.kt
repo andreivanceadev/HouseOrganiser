@@ -14,6 +14,8 @@ class RecipesDataSource @Inject constructor(
 
     suspend fun saveRecipe(recipeEntity: RecipeEntity) = recipesDao.insert(recipeEntity)
 
+    suspend fun saveRecipes(listOfRecipeEntity: List<RecipeEntity>) = recipesDao.insertAll(listOfRecipeEntity)
+
     suspend fun updateRecipe(recipeEntity: RecipeEntity) = recipesDao.update(recipeEntity)
 
     suspend fun deleteRecipe(recipeEntity: RecipeEntity) = recipesDao.delete(recipeEntity)

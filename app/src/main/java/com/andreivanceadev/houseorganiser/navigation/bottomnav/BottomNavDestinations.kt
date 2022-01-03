@@ -1,7 +1,7 @@
-package com.andreivanceadev.navigation.bottomnav
+package com.andreivanceadev.houseorganiser.navigation.bottomnav
 
 import androidx.navigation.NamedNavArgument
-import com.andreivanceadev.navigation.NavigationCommand
+import com.andreivanceadev.houseorganiser.navigation.NavigationCommand
 
 sealed class BottomNavDestinations {
 

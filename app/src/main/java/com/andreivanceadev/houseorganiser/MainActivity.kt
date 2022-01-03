@@ -31,9 +31,9 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import com.andreivanceadev.houseorganiser.navigation.AppNavigator
 import com.andreivanceadev.houseorganiser.navigation.BottomNavigationItem
+import com.andreivanceadev.houseorganiser.navigation.bottomnav.BottomNavDestinations
+import com.andreivanceadev.houseorganiser.navigation.recipes.RecipesDirections
 import com.andreivanceadev.houseorganiser.style.AppTheme
-import com.andreivanceadev.navigation.bottomnav.BottomNavDestinations
-import com.andreivanceadev.navigation.recipes.RecipesDirections
 import com.andreivanceadev.recipes.view.RecipesListScreen
 import com.andreivanceadev.recipes.view.RecipesScreen
 import dagger.hilt.android.AndroidEntryPoint
