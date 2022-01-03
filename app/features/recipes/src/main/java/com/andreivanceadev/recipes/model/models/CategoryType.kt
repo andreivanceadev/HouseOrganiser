@@ -1,6 +1,10 @@
-package com.andreivanceadev.recipes.model
+package com.andreivanceadev.recipes.model.models
 
-enum class CategoryType(val id: Int, val categoryName: String) {
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+enum class CategoryType(val id: Int, val categoryName: String) : Parcelable {
     BREAKFAST(1, "Breakfast"),
     LUNCH(2, "Lunch"),
     DINNER(3, "Dinner"),

@@ -13,11 +13,14 @@ interface RecipeDao {
     @Query("SELECT * from recipes")
     suspend fun getAll(): List<RecipeEntity>?
 
-    @Query("SELECT * from recipes WHERE id = :recipeId LIMIT 1")
+    @Query("SELECT * from recipes WHERE recipeId = :recipeId LIMIT 1")
     suspend fun getById(recipeId: Int): RecipeEntity?
 
-    @Insert(onConflict = REPLACE)
+    @Insert
     suspend fun insert(recipe: RecipeEntity)
+
+    @Insert
+    suspend fun insertAll(recipes: List<RecipeEntity>)
 
     @Insert(onConflict = REPLACE)
     suspend fun update(recipe: RecipeEntity)

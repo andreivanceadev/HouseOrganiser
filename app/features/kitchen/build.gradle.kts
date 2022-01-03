@@ -10,6 +10,10 @@ apply("../../../gradleconfigs/ktlint-config.gradle")
 apply("../../${GradleFiles.commonAndroidConfig}")
 apply("../../${GradleFiles.commonUIDependencies}")
 
+hilt {
+    enableAggregatingTask = true
+}
+
 dependencies {
     implementation(project(":app:storage"))
 }

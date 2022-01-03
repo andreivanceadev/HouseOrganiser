@@ -1,4 +1,4 @@
-package com.andreivanceadev.navigation
+package com.andreivanceadev.houseorganiser.navigation
 
 import androidx.navigation.NamedNavArgument
 

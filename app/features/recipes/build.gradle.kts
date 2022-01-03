@@ -12,9 +12,12 @@ apply("../../../gradleconfigs/ktlint-config.gradle")
 apply("../../${GradleFiles.commonAndroidConfig}")
 apply("../../${GradleFiles.commonUIDependencies}")
 
+hilt {
+    enableAggregatingTask = true
+}
 dependencies {
     implementation(project(":app:features:common"))
-    implementation(project(":app:navigation"))
+    implementation(project(":app:storage"))
 
     implementation(Libs.coilCompose)
 }

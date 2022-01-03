@@ -10,6 +10,9 @@ apply("../../../gradleconfigs/ktlint-config.gradle")
 apply("../../${GradleFiles.commonAndroidConfig}")
 apply("../../${GradleFiles.commonUIDependencies}")
 
+hilt {
+    enableAggregatingTask = true
+}
 // Allow references to generated code
 kapt {
     correctErrorTypes = true

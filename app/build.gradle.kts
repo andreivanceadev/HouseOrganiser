@@ -8,6 +8,10 @@ plugins {
 
 apply("../gradleconfigs/ktlint-config.gradle")
 
+hilt {
+    enableAggregatingTask = true
+}
+
 android {
     compileSdk = Apps.compileSdk
     buildToolsVersion = Apps.buildTools
@@ -52,7 +56,6 @@ dependencies {
     implementation(project(":app:features:kitchen"))
     implementation(project(":app:features:recipes"))
     implementation(project(":app:features:common"))
-    implementation(project(":app:navigation"))
 
     implementation(Libs.kotlin)
     implementation(Libs.androidXCore)

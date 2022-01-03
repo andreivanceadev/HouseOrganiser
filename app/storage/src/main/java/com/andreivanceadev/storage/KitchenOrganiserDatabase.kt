@@ -5,22 +5,17 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.andreivanceadev.storage.dao.RecipeCategoryDao
 import com.andreivanceadev.storage.dao.RecipeDao
-import com.andreivanceadev.storage.entities.recipes.RecipeCategoryEntity
 import com.andreivanceadev.storage.entities.recipes.RecipeEntity
 
 @Database(
     entities = [
-        RecipeCategoryEntity::class,
         RecipeEntity::class
     ],
     version = 1, exportSchema = false
 )
 @TypeConverters(DBTypeConverters::class)
 abstract class KitchenOrganiserDatabase : RoomDatabase() {
-
-    abstract val recipeCategoryDao: RecipeCategoryDao
 
     abstract val recipeDao: RecipeDao
 
