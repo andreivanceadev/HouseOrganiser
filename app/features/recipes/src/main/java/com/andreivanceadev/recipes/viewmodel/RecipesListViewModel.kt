@@ -35,9 +35,12 @@ class RecipesListViewModel @Inject constructor(
     }
 
     private fun loadListOfRecipes(categoryType: CategoryType) = intent {
-        var recipes = recipesRepository.getRecipes(categoryType)
-
-        recipes = prepopulateDatabaseForDebug(recipes, categoryType)
+        val recipes =
+            if (categoryType == CategoryType.ALL) {
+                recipesRepository.getRecipes()
+            } else {
+                recipesRepository.getRecipes(categoryType)
+            }
 
         reduce {
             state.copy(
