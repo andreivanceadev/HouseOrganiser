@@ -24,6 +24,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -38,6 +39,8 @@ import com.andreivanceadev.recipes.viewmodel.RecipesViewModel
 import com.andreivanceadev.recipes.viewmodel.RecipesViewState
 import com.andreivanceadev.recipes.viewmodel.ShowCategory
 import kotlinx.coroutines.flow.collect
+
+const val RECIPE_CATEGORY_TEST_TAG = "recipeCategoryTestTag"
 
 @Composable
 fun RecipesScreen(
@@ -113,7 +116,8 @@ fun RecipeCategory(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .height(80.dp),
+            .height(80.dp)
+            .testTag(RECIPE_CATEGORY_TEST_TAG),
         shape = RoundedCornerShape(Dimens.space_quarter)
     ) {
         Button(

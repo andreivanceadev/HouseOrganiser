@@ -40,6 +40,9 @@ android {
             isMinifyEnabled = false
         }
     }
+    packagingOptions {
+        resources.excludes.add("META-INF/*")
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -92,8 +95,19 @@ dependencies {
 
     implementation(Libs.composeNavigation)
     implementation(Libs.composeHiltNavigation)
+
     // UI Tests
     androidTestImplementation(Libs.composeTesting)
+    debugImplementation(Libs.composeTestingManifest)
+
+    implementation(UiTestLibs.androidTestRunner)
+    implementation(UiTestLibs.androidTestEspresso)
+    implementation(UiTestLibs.androidTestEspressoIntents)
+    implementation(UiTestLibs.androidTestEspressoContrib)
+    implementation(UiTestLibs.androidTestEspressoWeb)
+    implementation(UiTestLibs.androidTestUIAutomator)
+
+    androidTestUtil(UiTestLibs.androidTestOrchestrator)
 }
 
 kapt {
