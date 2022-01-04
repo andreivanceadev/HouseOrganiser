@@ -19,13 +19,12 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -34,9 +33,9 @@ import com.andreivanceadev.common.theme.Dimens
 import com.andreivanceadev.common.theme.TransparentBlack_x87
 import com.andreivanceadev.recipes.R
 import com.andreivanceadev.recipes.model.models.CategoryType
+import com.andreivanceadev.recipes.model.models.RecipeCategoryModel
 import com.andreivanceadev.recipes.viewmodel.RecipesNavigator
 import com.andreivanceadev.recipes.viewmodel.RecipesViewModel
-import com.andreivanceadev.recipes.viewmodel.RecipesViewState
 import com.andreivanceadev.recipes.viewmodel.ShowCategory
 import kotlinx.coroutines.flow.collect
 
@@ -48,10 +47,8 @@ fun RecipesScreen(
     recipesNavigator: RecipesNavigator
 ) {
 
-    val viewState = viewModel.container.stateFlow.collectAsState()
-
     RecipesView(
-        viewState = remember { getMockedViewState() },
+        categories = getCategories(),
         onRecipeCategoryClick = { categoryName ->
             viewModel.onMoveToRecipesList(categoryName)
         }
@@ -69,8 +66,42 @@ fun RecipesScreen(
 }
 
 @Composable
+private fun getCategories() = listOf(
+    RecipeCategoryModel(
+        CategoryType.ALL,
+        R.drawable.breakfast,
+        stringResource(R.string.all_recipes),
+        stringResource(R.string.all_recipes_description)
+    ),
+    RecipeCategoryModel(
+        CategoryType.BREAKFAST,
+        R.drawable.breakfast,
+        stringResource(R.string.breakfast),
+        stringResource(R.string.breakfast_description)
+    ),
+    RecipeCategoryModel(
+        CategoryType.LUNCH,
+        R.drawable.lunch,
+        stringResource(R.string.lunch),
+        stringResource(R.string.lunch_description)
+    ),
+    RecipeCategoryModel(
+        CategoryType.DINNER,
+        R.drawable.breakfast,
+        stringResource(R.string.dinner),
+        stringResource(R.string.dinner_description)
+    ),
+    RecipeCategoryModel(
+        CategoryType.SNACK,
+        R.drawable.snack,
+        stringResource(R.string.snacks),
+        stringResource(R.string.snacks_description)
+    )
+)
+
+@Composable
 fun RecipesView(
-    viewState: RecipesViewState,
+    categories: List<RecipeCategoryModel>,
     onRecipeCategoryClick: (category: CategoryType) -> Unit
 ) {
     Column(
@@ -78,7 +109,7 @@ fun RecipesView(
             .padding(Dimens.space_x1)
     ) {
         LazyColumn {
-            items(viewState.categories) { recipeCategory ->
+            items(categories) { recipeCategory ->
                 Spacer(modifier = Modifier.height(Dimens.space_half))
                 RecipeCategory(
                     categoryType = recipeCategory.categoryType,

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="breakfast">Breakfast</string>
+    <string name="lunch">Lunch</string>
+    <string name="dinner">Dinner</string>
+    <string name="snacks">Snacks</string>
+    <string name="breakfast_description">This is just breakfast</string>
+    <string name="lunch_description">This is just for lunch</string>
+    <string name="dinner_description">This is just for Dinner</string>
+    <string name="snacks_description">This is just for snacks</string>
+    <string name="all_recipes">All Recipes</string>
+    <string name="all_recipes_description">This is a list of all recipes</string>
+</resources>

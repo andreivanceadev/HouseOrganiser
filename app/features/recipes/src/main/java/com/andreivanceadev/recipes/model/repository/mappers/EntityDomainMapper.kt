@@ -56,6 +56,7 @@ fun CategoryType.toEntity() = when (this) {
     CategoryType.LUNCH -> CategoryTypeEntity.LUNCH
     CategoryType.DINNER -> CategoryTypeEntity.DINNER
     CategoryType.SNACK -> CategoryTypeEntity.SNACK
+    else -> throw IllegalStateException("Category Type Not Supported")
 }
 
 fun IngredientModel.toEntity() = IngredientEntity(

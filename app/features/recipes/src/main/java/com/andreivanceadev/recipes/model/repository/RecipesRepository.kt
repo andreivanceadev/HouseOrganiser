@@ -14,15 +14,11 @@ class RecipesRepository @Inject constructor(
     private val recipesDataSource: RecipesDataSource
 ) {
 
-    suspend fun getRecipes() = recipesDataSource.getRecipes()?.toDomainModel()
+    suspend fun getRecipes(): List<RecipeModel> = recipesDataSource.getRecipes()?.toDomainModel() ?: emptyList()
 
     suspend fun getRecipes(categoryType: CategoryType): List<RecipeModel> {
         val cachedRecipes = recipesDataSource.getRecipes()?.toDomainModel()
         return cachedRecipes?.filter { it.type == categoryType } ?: emptyList()
-    }
-
-    suspend fun addRecipe(recipeEntity: RecipeEntity) {
-        recipesDataSource.saveRecipe(recipeEntity)
     }
 
     suspend fun addRecipes(recipes: List<RecipeEntity>) {

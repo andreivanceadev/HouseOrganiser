@@ -5,6 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 enum class CategoryType(val id: Int, val categoryName: String) : Parcelable {
+    ALL(0, "All"),
     BREAKFAST(1, "Breakfast"),
     LUNCH(2, "Lunch"),
     DINNER(3, "Dinner"),
@@ -23,6 +24,7 @@ enum class CategoryType(val id: Int, val categoryName: String) : Parcelable {
 
         fun getByName(name: String): CategoryType {
             return when (name) {
+                ALL.categoryName -> ALL
                 BREAKFAST.categoryName -> BREAKFAST
                 LUNCH.categoryName -> LUNCH
                 DINNER.categoryName -> DINNER
