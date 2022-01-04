@@ -111,7 +111,9 @@ object Libs {
     const val composeAnimation = "androidx.compose.animation:animation:${Versions.compose}"
     const val composeTooling = "androidx.compose.ui:ui-tooling:1.0.0-beta09"
     const val composeViewModel = "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.composeViewModel}"
+
     const val composeTesting = "androidx.compose.ui:ui-test-junit4:${Versions.compose}"
+    const val composeTestingManifest = "androidx.compose.ui:ui-test-manifest:${Versions.compose}"
 
     const val composeNavigation = "androidx.navigation:navigation-compose:${Versions.composeNavigation}"
     const val composeHiltNavigation = "androidx.hilt:hilt-navigation-compose:${Versions.composeHiltNavigation}"
